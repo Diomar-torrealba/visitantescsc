@@ -1,0 +1,111 @@
+<div class="conatiner p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3 class="text-uppercase">EDITANDO UNA PERSONA</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/edit/{{persona.id}}" method="post">
+                    <div class="input-group mt-2">
+                        <label for="name" class="input-group-text">Nombre</label>
+                        <input class="form-control" type="text" name="nombre" id="name" value="{{persona.nombre}}" placeholder="Ejemplo: Luis Angel" autofocus required>
+                    </div>
+                    <div class="input-group mt-2">
+                        <label for="lastname" class="input-group-text">Apellido</label>
+                        <input class="form-control" type="text" name="apellido" id="apellido"  value="{{persona.apellido}}" required>
+                    </div>
+                      <div class="input-group mt-2">
+                        <label for="lastname" class="input-group-text">cédula</label>
+                        <input class="form-control" type="text" name="cedula" id="cedula"  value="{{persona.cedula}}" required>
+                    </div>
+                      <div class="input-group mt-2">
+                        <label for="lastname" class="input-group-text">teléfono</label>
+                        <input class="form-control" type="text" name="telefono" id="telefono"  value="{{persona.telefono}}" required>
+                    </div>
+                      <div class="input-group mt-2">
+                 <label for="name" class="input-group-text">Filial</label>
+                 <select  class="form-control" name="filial" id="filial" onchange="cargarDepartamentos();">
+               
+                    <option value="{{persona.filial}}">Seleccione una Filial...</option>
+                </select> 
+                </div>
+                <div class="input-group mt-2">
+                <label for="name" class="input-group-text">Departamento</label>
+                 <select class="form-control" name="departamento" id="departamento">
+              <option value="">Seleccione</option>
+          </select>
+          </div>
+
+
+
+
+
+                    <div class="form-group mt-4 d-grid gap-2">
+                        <button class="btn btn-success"> Actualizar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+function cargarFiliales() {
+    var array = ["csc", "andino", "cca", "vencemos", "entipi"];
+    array.sort();
+    addOptions("filial", array);
+}
+
+
+//Función para agregar opciones a un <select>.
+function addOptions(domElement, array) {
+    var selector = document.getElementsByName(domElement)[0];
+    for (filial in array) {
+        var opcion = document.createElement("option");
+        opcion.text = array[filial];
+        // Añadimos un value a los option para hacer mas facil escoger los departamentos
+        opcion.value = array[filial].toLowerCase()
+        selector.add(opcion);
+    }
+}
+
+
+
+function cargarDepartamentos() {
+    // Objeto de filial con departamentos
+    var listaDepartamentos = {
+      csc: ["informatica", "auditoria interna ", "bienes publicos", "consultoria exportación e importación","gerencia de concreto","gerencia general de comercializacion","gerencia general de logistica mantenimiento y proyectos","gerencia general de operaciones","oficina de atencion ciudadana","oficina de gestion administrativa","oficina de gestion comunicacional"],
+      andino: ["gerencia de comercializacion", "gerencia de logistica", "bienes publicos"],
+      cca: ["gerencia de comercializacion", "gerencia de logistica", "bienes publicos"],
+      vencemos: ["gerencia de comercializacion", "gerencia de logistica ", "bienes publicos"],
+      entipi: ["gerencia de comercializacion", "gerencia de logistica", "bienes publicos"]
+    }
+    
+    var filiales = document.getElementById('filial')
+    var departamentos = document.getElementById('departamento')
+    var filialSeleccionada = filiales.value
+    
+    // Se limpian los departamentos
+    departamentos.innerHTML = '<option value="">Seleccione</option>'
+    
+    if(filialSeleccionada !== ''){
+      // Se seleccionan los departamentos y se ordenan
+      filialSeleccionada = listaDepartamentos[filialSeleccionada]
+      filialSeleccionada.sort()
+    
+      // Insertamos los departamentos
+      filialSeleccionada.forEach(function(departamento){
+        let opcion = document.createElement('option')
+        opcion.value = departamento
+        opcion.text = departamento
+        departamentos.add(opcion)
+      });
+    }
+    
+  }
+  
+ // Iniciar la carga de filial solo para comprobar que funciona
+cargarFiliales();
+</script>

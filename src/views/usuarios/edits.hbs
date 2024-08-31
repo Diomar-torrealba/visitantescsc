@@ -1,0 +1,44 @@
+<div class="conatiner p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3 class="text-uppercase">EDITANDO UN USUARIO</h3>
+                </div>
+                <div class="card-body">
+                    {{!-- formulario para edicion de usuario --}}
+                    <form action="/edits/{{usuarios.id}}" method="post">                    
+                    <div class="input-group mt-2">
+                        <label for="username" class="input-group-text">Usuario</label>
+                        <input class="form-control" type="text" name="username" id="username" 
+                         value="{{usuarios.username}}" required>
+                    </div>
+                      <div class="input-group mt-2">
+                        <label for="nombre" class="input-group-text">Nombre</label>
+                        <input class="form-control" type="text" name="nombre" id="nombre" 
+                         value="{{usuarios.nombre}}" required>
+                    </div>
+                      <div class="input-group mt-2">
+                        <label for="apellido" class="input-group-text">Apellido</label>
+                        <input class="form-control" type="text" name="apellido" id="apellido" 
+                         value="{{usuarios.apellido}}" required>
+                    </div>
+                    <div class="input-group mt-2">
+                        <label for="cedula" class="input-group-text">Cédula</label>
+                        <input class="form-control" type="number" name="cedula" id="cedula" 
+                         value="{{usuarios.cedula}}" required>
+                    </div>
+                    <div class="input-group mt-2">
+                        <label for="rol" class="input-group-text">Rol</label>
+                        <input class="form-control" type="text" name="rol_id" id="rol_id" 
+                         value="{{usuarios.rol_id}}" required>
+                    </div>                    
+                    <div class="form-group mt-4 d-grid gap-2">
+                        <button class="btn btn-success"> Actualizar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
